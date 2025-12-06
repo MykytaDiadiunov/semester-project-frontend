@@ -1,5 +1,5 @@
 <template>
-  <header class="app-header" ref="headerRef">
+  <header class="app-header">
     <div class="header-inner">
       <a class="logo-btn" @click="routing.toHome()"> Logo </a>
 
@@ -17,13 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { NButton } from 'naive-ui'
 import { useRouting } from '@/composables'
 import type { HeaderActionItem } from '@/models' // Лучше использовать type-only import
 
 const routing = useRouting()
-const headerRef = ref<HTMLElement | null>(null)
 
 const actionList: HeaderActionItem[] = [
   { title: 'Home', routing: routing.toHome },

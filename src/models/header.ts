@@ -1,4 +1,4 @@
 export interface HeaderActionItem {
-  title: string,
-  routing: Function
+  title: string
+  routing: () => void
 }

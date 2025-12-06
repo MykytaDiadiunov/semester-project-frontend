@@ -12,11 +12,14 @@ export const apiService = () => {
     },
   } as CreateAxiosDefaults)
 
-  async function get<T = any, R = any>(url: string, config?: AxiosRequestConfig<T>): Promise<R> {
+  async function get<T = unknown, R = unknown>(
+    url: string,
+    config?: AxiosRequestConfig<T>,
+  ): Promise<R> {
     return formattingResponse(await instance.get(url, config as AxiosRequestConfig<T>))
   }
 
-  async function post<T = any, R = any>(
+  async function post<T = unknown, R = unknown>(
     url: string,
     data?: T,
     config?: AxiosRequestConfig<T>,
@@ -24,7 +27,7 @@ export const apiService = () => {
     return formattingResponse(await instance.post(url, data, config as AxiosRequestConfig<T>))
   }
 
-  async function put<T = any, R = any>(
+  async function put<T = unknown, R = unknown>(
     url: string,
     data?: T,
     config?: AxiosRequestConfig<T>,
@@ -32,11 +35,14 @@ export const apiService = () => {
     return formattingResponse(await instance.put(url, data, config as AxiosRequestConfig<T>))
   }
 
-  async function del<T = any, R = any>(url: string, config?: AxiosRequestConfig<T>): Promise<R> {
+  async function del<T = unknown, R = unknown>(
+    url: string,
+    config?: AxiosRequestConfig<T>,
+  ): Promise<R> {
     return formattingResponse(await instance.delete(url, config as AxiosRequestConfig<T>))
   }
 
-  function formattingResponse<T = any>(response: AxiosResponse<T>): T {
+  function formattingResponse<T = unknown>(response: AxiosResponse<T>): T {
     return response.data
   }
 
