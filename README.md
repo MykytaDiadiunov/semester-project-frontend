@@ -1,5 +1,38 @@
-# Vue 3 + TypeScript + Vite
+# Шаг 1: Фундамент (Установка Node.js)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+`Node.js` — это среда, которая позволяет запускать JavaScript вне браузера. Без неё современные инструменты не работают.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+1. Зайди на официальный сайт [nodejs.org](https://nodejs.org).
+2. Скачай версию, подписанную как **LTS** (Long Term Support). Это самая стабильная версия.
+3. Установи её как обычную программу (просто жми "Next").
+
+### Как проверить?
+После установки открой терминал (командную строку) и введи:
+
+```bash
+node -v
+```
+
+# Шаг 2: Установка и Запуск
+
+Нужно скачать библиотеки. Вводи команды в терминал по очереди:
+
+1. Клонируем репозиторий:
+```bash
+git clone https://github.com/MykytaDiadiunov/semester-project-frontend.git
+```
+
+3. Заходим в папку проекта:
+```bash
+cd semester-project-frontend
+```
+
+4. Устанавливаем зависимости (займет минуту):
+```bash
+npm install
+```
+
+5. Запускаем проект:
+```bash
+npm run dev
+```
