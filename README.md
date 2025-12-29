@@ -19,7 +19,7 @@ node -v
 
 1. Клонируем репозиторий:
 ```bash
-git clone https://github.com/MykytaDiadiunov/semester-project-frontend.git
+git clone https://github.com/MykytaDiadiunov/semester-project-frontend.git --branch develop
 ```
 
 3. Заходим в папку проекта:
