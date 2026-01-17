@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { NButton } from 'naive-ui'
 import { useRouting } from '@/composables'
-import type { HeaderActionItem } from '@/models' // Лучше использовать type-only import
+import type { HeaderActionItem } from '@/types'
 
 const routing = useRouting()
 
