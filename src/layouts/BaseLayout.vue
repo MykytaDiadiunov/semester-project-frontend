@@ -2,7 +2,12 @@
   <div class="base-layout">
     <app-header />
     <main class="main-content">
-      <slot />
+      <div>
+        <div></div>
+        <div>
+          <slot />
+        </div>
+      </div>
     </main>
     <app-footer />
   </div>
