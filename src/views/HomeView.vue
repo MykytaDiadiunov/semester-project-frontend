@@ -1,6 +1,20 @@
 <template>
   <base-layout>
-    <Bar :data="data" :options="options" />
+    <div class="main__wrapper">
+      <div class="main__filter">
+        <app-filter />
+      </div>
+      <div class="main__content">
+        <Bar
+          :style="{
+            width: '100%',
+            heigth: '100%',
+          }"
+          :data="data"
+          :options="options"
+        />
+      </div>
+    </div>
   </base-layout>
 </template>
 
@@ -15,6 +29,7 @@ import {
   CategoryScale,
   LinearScale,
 } from 'chart.js'
+import AppFilter from '@/components/views/home-view/AppFilter.vue'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -48,4 +63,18 @@ const data = {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.main {
+  &__wrapper {
+    display: flex;
+  }
+
+  &__filter {
+    width: 30%;
+  }
+
+  &__main {
+    width: 100%;
+  }
+}
+</style>
