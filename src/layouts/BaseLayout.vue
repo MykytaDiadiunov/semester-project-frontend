@@ -3,7 +3,10 @@
     <app-header />
     <main class="main-content">
       <div>
-        <slot />
+        <div></div>
+        <div>
+          <slot />
+        </div>
       </div>
     </main>
     <app-footer />
