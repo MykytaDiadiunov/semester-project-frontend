@@ -1,27 +1,27 @@
 <template>
   <base-layout>
-    <Bar :data="data" :options="options" />
+    <div class="main__wrapper">
+      <div class="main__filter">
+        <app-filter v-model:values="filterValues"/>
+      </div>
+      <div class="main__content">
+        <app-content :data="data"/>
+      </div>
+    </div>
   </base-layout>
 </template>
 
 <script setup lang="ts">
-import { Bar } from 'vue-chartjs'
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from 'chart.js'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+import { ref } from 'vue'
+import { Filter } from '@/types'
+import AppFilter from '@/components/views/home-view/AppFilter.vue'
+import AppContent from '@/components/views/home-view/AppContent.vue'
 
-const options = {
-  responsive: true,
-  maintainAspectRatio: false,
-}
+const filterValues = ref<Filter>({
+  categories: [],
+  requrementSkills: [],
+})
 
 const data = {
   labels: [
@@ -46,6 +46,17 @@ const data = {
     },
   ],
 }
+
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.main {
+  &__wrapper {
+    display: flex;
+  }
+
+  &__filter {
+    width: 30%;
+  }
+}
+</style>

@@ -16,3 +16,10 @@ export interface JobOffer {
   work_place_type: WorkPlaceType
   offer_category: string
 }
+
+export interface JobRequirementSkill {
+  id: number
+  skill_title: string
+  created_at: Date
+  updated_at: Date
+}
