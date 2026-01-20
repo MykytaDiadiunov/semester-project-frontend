@@ -5,7 +5,9 @@
         <app-filter v-model:values="filterValues"/>
       </div>
       <div class="main__content">
-        <app-content :data="data"/>
+        <div v-if="barData && pieData && statisticDataNew">
+          <app-content :bar-data="barData" :pie-data="pieData" :statistic-data-new="statisticDataNew"/>
+        </div>
       </div>
     </div>
   </base-layout>
@@ -13,39 +15,51 @@
 
 <script setup lang="ts">
 
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Filter } from '@/types'
 import AppFilter from '@/components/views/home-view/AppFilter.vue'
 import AppContent from '@/components/views/home-view/AppContent.vue'
+import { requestService } from '@/services'
+import { message, useChartConfig } from '@/composables'
+
+const { getBarConfig, getPieConfig } = useChartConfig()
+
+const request = requestService()
+
+const barData = ref(null)
+const pieData = ref(null)
+
+const statisticDataNew = ref(null)
+
 
 const filterValues = ref<Filter>({
   categories: [],
   requrementSkills: [],
 })
 
-const data = {
-  labels: [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ],
-  datasets: [
-    {
-      label: 'Data One',
-      backgroundColor: '#f87979',
-      data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11],
-    },
-  ],
-}
+onMounted(async () => {
+  try {
+    const statisticResponse = await request.getOffersStatistic()
+
+    statisticDataNew.value = statisticResponse
+
+    barData.value = getBarConfig(
+      statisticResponse.top_skills.map(val => val.count),
+      statisticResponse.top_skills.map(val => val.skill_title)
+    )
+
+    pieData.value = getPieConfig(
+      statisticResponse.work_types.map(val => val.count),
+      statisticResponse.work_types.map(val => val.work_place_type),
+      ["#FF0055", "#00E5FF", "#76FF03", "#D500F9", "#FFD600"]
+    )
+
+
+  } catch (e: unknown) {
+    message.error(String(e))
+  }
+})
+
 
 </script>
 
@@ -53,6 +67,10 @@ const data = {
 .main {
   &__wrapper {
     display: flex;
+  }
+
+  &__content {
+    width: 100%;
   }
 
   &__filter {

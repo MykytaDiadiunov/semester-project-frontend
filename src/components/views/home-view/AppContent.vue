@@ -1,38 +1,30 @@
 <template>
   <div>
-    <Bar
-      :data="data"
-      :options="options"
-    />
+    <AppGraphs title="2025" :bar-data="barData" :pie-data="pieData"/>
+    <AppStatistic :data="statisticDataNew.general"/>
+
+    <br/>
+
+    <AppGraphs title="2023" :bar-data="barData" :pie-data="pieData"/>
+    <AppStatistic :data="statisticDataNew.general"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Bar } from 'vue-chartjs'
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  ChartData,
-} from 'chart.js'
-import { ExtendedDataPoint } from 'node_modules/vue-chartjs/dist/typedCharts'
-
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
-
-const options = {
-  responsive: true,
-  maintainAspectRatio: false,
-}
+  import { ChartData } from 'chart.js';
+  import { JobOfferStatistic } from '@/types';
+  import AppStatistic from '@/components/views/home-view/AppStatistic.vue'
+  import AppGraphs from '@/components/views/home-view/AppGraphs.vue'
 
 type Props = {
-  data: ChartData<"bar", (number | [number, number])[] | ExtendedDataPoint[], unknown>
+  barData: ChartData<"bar">
+  pieData: ChartData<"pie">
+  statisticDataNew: JobOfferStatistic 
 }
 
 defineProps<Props>()
-
 </script>
+
+<style scoped lang="scss">
+
+</style>
