@@ -2,11 +2,26 @@
   <base-layout>
     <div class="main__wrapper">
       <div class="main__filter">
-        <app-filter v-model:values="filterValues"/>
+        <app-filter v-model:values="filterValues" @filter="fetchData"/>
       </div>
       <div class="main__content">
-        <div v-if="barData && pieData && statisticDataNew">
-          <app-content :bar-data="barData" :pie-data="pieData" :statistic-data-new="statisticDataNew"/>
+        <div 
+          v-if="
+            barDataNew && 
+            pieDataNew && 
+            statisticDataNew && 
+            barDataOld && 
+            pieDataOld && 
+            statisticDataOld
+          ">
+          <app-content 
+            :bar-data-new="barDataNew" 
+            :pie-data-new="pieDataNew" 
+            :statistic-data-new="statisticDataNew"
+            :bar-data-old="barDataOld" 
+            :pie-data-old="pieDataOld" 
+            :statistic-data-old="statisticDataOld"
+          />
         </div>
       </div>
     </div>
@@ -26,31 +41,61 @@ const { getBarConfig, getPieConfig } = useChartConfig()
 
 const request = requestService()
 
-const barData = ref(null)
-const pieData = ref(null)
+const barDataNew = ref(null)
+const pieDataNew = ref(null)
+const barDataOld = ref(null)
+const pieDataOld = ref(null)
 
 const statisticDataNew = ref(null)
+const statisticDataOld = ref(null)
 
 
 const filterValues = ref<Filter>({
-  categories: [],
-  requrementSkills: [],
+  offer_category__in: [],
+  requirement_skills__skill_id__in: [],
 })
 
 onMounted(async () => {
-  try {
-    const statisticResponse = await request.getOffersStatistic()
+  await fetchData()
+})
 
-    statisticDataNew.value = statisticResponse
+async function fetchData() {
+    try {
+    const newStatisticResponse = await request.getOffersStatistic({
+      date: '2025',
+      offer_category__in: filterValues.value.offer_category__in.join(',') || null,
+      requirement_skills__skill_id__in: filterValues.value.requirement_skills__skill_id__in.join(',') || null
+    })
 
-    barData.value = getBarConfig(
-      statisticResponse.top_skills.map(val => val.count),
-      statisticResponse.top_skills.map(val => val.skill_title)
+    statisticDataNew.value = newStatisticResponse
+
+    barDataNew.value = getBarConfig(
+      newStatisticResponse.top_skills.map(val => val.count),
+      newStatisticResponse.top_skills.map(val => val.skill_title)
     )
 
-    pieData.value = getPieConfig(
-      statisticResponse.work_types.map(val => val.count),
-      statisticResponse.work_types.map(val => val.work_place_type),
+    pieDataNew.value = getPieConfig(
+      newStatisticResponse.work_types.map(val => val.count),
+      newStatisticResponse.work_types.map(val => val.work_place_type),
+      ["#FF0055", "#00E5FF", "#76FF03", "#D500F9", "#FFD600"]
+    )
+
+    const oldStatisticResponse = await request.getOffersStatistic({
+      date: '2023',
+      offer_category__in: filterValues.value.offer_category__in.join(',') || null,
+      requirement_skills__skill_id__in: filterValues.value.requirement_skills__skill_id__in.join(',') || null
+    })
+
+    statisticDataOld.value = oldStatisticResponse
+
+    barDataOld.value = getBarConfig(
+      oldStatisticResponse.top_skills.map(val => val.count),
+      oldStatisticResponse.top_skills.map(val => val.skill_title)
+    )
+
+    pieDataOld.value = getPieConfig(
+      oldStatisticResponse.work_types.map(val => val.count),
+      oldStatisticResponse.work_types.map(val => val.work_place_type),
       ["#FF0055", "#00E5FF", "#76FF03", "#D500F9", "#FFD600"]
     )
 
@@ -58,7 +103,7 @@ onMounted(async () => {
   } catch (e: unknown) {
     message.error(String(e))
   }
-})
+}
 
 
 </script>

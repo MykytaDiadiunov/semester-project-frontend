@@ -5,7 +5,7 @@
         <n-button type="info" @click="handleFilter">Filtr</n-button>  
         <n-button type="error" @click="handleClearFilter">Wyczyść filtr</n-button>  
       </div>
-      <n-checkbox-group v-model:value="filterValues.categories">
+      <n-checkbox-group v-model:value="filterValues.offer_category__in">
         <div class="filter__title">Kategorie</div>
         <n-card class="scrollable-card" @scroll="handleCategoriesScroll">
           <n-space
@@ -26,7 +26,7 @@
       </n-checkbox-group>
       <!-- I'm so lazy :) -->
       <br/> 
-      <n-checkbox-group v-model:value="filterValues.requrementSkills">
+      <n-checkbox-group v-model:value="filterValues.requirement_skills__skill_id__in">
         <div class="filter__title">Wymagane umiejętności</div>
         <n-card class="scrollable-card" @scroll="handleRequirementSkillsScroll">
           <n-space
@@ -172,8 +172,8 @@ function handleFilter() {
 }
 
 function handleClearFilter() {
-  filterValues.value.categories = []
-  filterValues.value.requrementSkills = []
+  filterValues.value.offer_category__in = []
+  filterValues.value.requirement_skills__skill_id__in = []
 }
 
 </script>

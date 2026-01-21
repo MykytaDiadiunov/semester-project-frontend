@@ -20,14 +20,14 @@
       <div class="stat-box">
         <span class="label">Średnia na start</span>
         <span class="value money">
-          {{ data.avg_salary_from.toLocaleString('pl-PL') }} PLN
+          {{ data?.avg_salary_from?.toLocaleString('pl-PL') || 'Brak danych'}} PLN
         </span>
       </div>
 
       <div class="stat-box">
         <span class="label">Top stawka</span>
         <span class="value money highlight">
-          {{ data.max_salary_possible.toLocaleString('pl-PL') }} PLN
+          {{ data?.max_salary_possible?.toLocaleString('pl-PL') || 'Brak danych' }} PLN
         </span>
       </div>
 

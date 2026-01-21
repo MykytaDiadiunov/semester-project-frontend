@@ -1,4 +1,4 @@
-import { Pagination, JobOffer, PaginationParams, JobRequirementSkill, JobOfferStatistic } from '@/types'
+import { Pagination, JobOffer, PaginationParams, JobRequirementSkill, JobOfferStatistic, FilterParams } from '@/types'
 import { apiService } from './api'
 
 export const requestService = () => {
@@ -26,8 +26,8 @@ export const requestService = () => {
     return await api.get('/job-requirement-skill/', { params: { ...paginationParams } })
   }
 
-  async function getOffersStatistic(): Promise<JobOfferStatistic> {
-    return await api.get('/job-offers/statistic/')
+  async function getOffersStatistic(filterParams?: FilterParams): Promise<JobOfferStatistic> {
+    return await api.get('/job-offers/statistic/', { params: { ...filterParams } })
   }
 
   return {
