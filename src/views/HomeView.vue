@@ -41,13 +41,13 @@ const { getBarConfig, getPieConfig } = useChartConfig()
 
 const request = requestService()
 
-const barDataNew = ref(null)
-const pieDataNew = ref(null)
-const barDataOld = ref(null)
-const pieDataOld = ref(null)
+const barDataNew = ref()
+const pieDataNew = ref()
+const barDataOld = ref()
+const pieDataOld = ref()
 
-const statisticDataNew = ref(null)
-const statisticDataOld = ref(null)
+const statisticDataNew = ref()
+const statisticDataOld = ref()
 
 
 const filterValues = ref<Filter>({
