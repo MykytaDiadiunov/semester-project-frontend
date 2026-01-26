@@ -82,8 +82,8 @@ const emit = defineEmits<{
 onMounted(async () => {
   try {
     const categoriesResponse: Pagination<string> = await request.getOffersCategory({
-        page: currentCategoriesPage.value,
-        page_size: pageSize,
+      page: currentCategoriesPage.value,
+      page_size: pageSize,
     })
     offerCategories.value = categoriesResponse.results
     maxCategoriesPages.value = Math.ceil(categoriesResponse.count / pageSize)
@@ -106,10 +106,10 @@ function handleCategoriesScroll(e: Event) {
   const target = e.target as HTMLElement
   
   const { scrollTop, scrollHeight, clientHeight } = target
-  
+
   if (
       (scrollHeight - scrollTop <= clientHeight) && 
-      (currentCategoriesPage.value < currentCategoriesPage.value)
+      (currentCategoriesPage.value < maxCategoriesPages.value)
     ) {
       loadMoreCategories()
   }
