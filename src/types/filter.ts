@@ -22,7 +22,7 @@ export interface FilterParams {
   salary_value_to__isnull?: boolean;
 
   offer_category?: string;
-  offer_category__in?: string | string[];
+  offer_category__in?: Partial<string | string[] | null>;
 
   working_time_type?: string;
   working_time_type__in?: string | string[];
@@ -31,7 +31,7 @@ export interface FilterParams {
   work_place_type__in?: string | string[];
 
   requirement_skills__skill_title?: string;
-  requirement_skills__skill_id__in?: string | string[];
+  requirement_skills__skill_id__in?: Partial<string | string[] | null>;
 
   requirement_skills__skill_level?: number;
   requirement_skills__skill_level__gte?: number;

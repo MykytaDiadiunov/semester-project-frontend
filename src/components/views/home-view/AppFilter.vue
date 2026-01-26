@@ -5,7 +5,7 @@
         <n-button type="info" @click="handleFilter">Filtr</n-button>  
         <n-button type="error" @click="handleClearFilter">Wyczyść filtr</n-button>  
       </div>
-      <n-checkbox-group v-model:value="filterValues.offer_category__in">
+      <n-checkbox-group v-if="filterValues" v-model:value="filterValues.offer_category__in">
         <div class="filter__title">Kategorie</div>
         <n-card class="scrollable-card" @scroll="handleCategoriesScroll">
           <n-space
@@ -26,7 +26,7 @@
       </n-checkbox-group>
       <!-- I'm so lazy :) -->
       <br/> 
-      <n-checkbox-group v-model:value="filterValues.requirement_skills__skill_id__in">
+      <n-checkbox-group v-if="filterValues" v-model:value="filterValues.requirement_skills__skill_id__in">
         <div class="filter__title">Wymagane umiejętności</div>
         <n-card class="scrollable-card" @scroll="handleRequirementSkillsScroll">
           <n-space
@@ -82,8 +82,8 @@ const emit = defineEmits<{
 onMounted(async () => {
   try {
     const categoriesResponse: Pagination<string> = await request.getOffersCategory({
-        page: currentCategoriesPage.value,
-        page_size: pageSize,
+      page: currentCategoriesPage.value,
+      page_size: pageSize,
     })
     offerCategories.value = categoriesResponse.results
     maxCategoriesPages.value = Math.ceil(categoriesResponse.count / pageSize)
@@ -106,10 +106,10 @@ function handleCategoriesScroll(e: Event) {
   const target = e.target as HTMLElement
   
   const { scrollTop, scrollHeight, clientHeight } = target
-  
+
   if (
       (scrollHeight - scrollTop <= clientHeight) && 
-      (currentCategoriesPage.value < currentCategoriesPage.value)
+      (currentCategoriesPage.value < maxCategoriesPages.value)
     ) {
       loadMoreCategories()
   }
@@ -172,8 +172,10 @@ function handleFilter() {
 }
 
 function handleClearFilter() {
-  filterValues.value.offer_category__in = []
-  filterValues.value.requirement_skills__skill_id__in = []
+  if (filterValues.value?.offer_category__in && filterValues.value?.requirement_skills__skill_id__in) {
+    filterValues.value.offer_category__in = []
+    filterValues.value.requirement_skills__skill_id__in = []
+  }
 }
 
 </script>
