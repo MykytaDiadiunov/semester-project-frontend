@@ -1,10 +1,10 @@
 <template>
   <base-layout>
     <div class="instructions-container">
-      <header class="page-header">
-        <h1>Instrukcja Obsługi</h1>
+      <div class="page-header">
+        <h2>Instrukcja Obsługi</h2>
         <p class="subtitle">Jak korzystać z narzędzia do analizy rynku IT</p>
-      </header>
+      </div>
 
       <div class="steps-wrapper">
         <section class="step-card">
@@ -75,7 +75,7 @@
   text-align: center;
   margin-bottom: 3rem;
 
-  h1 {
+  h2 {
     font-size: 2.5rem;
     font-weight: 300;
     margin-bottom: 0.5rem;
