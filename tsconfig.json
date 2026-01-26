@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "ignoreDeprecations": "6.0",
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "baseUrl": ".",
+    "jsx": "preserve",
+    "strict": true,
+    "noEmit": true,
+
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"] 
     }
-  }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
