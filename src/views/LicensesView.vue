@@ -1,9 +1,9 @@
 <template>
   <base-layout>
     <div class="licenses-container">
-      <header class="page-header">
-        <h1>Licencje i Źródła</h1>
-      </header>
+      <div class="page-header">
+        <h2>Licencje i Źródła</h2>
+      </div>
 
       <div class="blocks-wrapper">
         <div class="license-block">
