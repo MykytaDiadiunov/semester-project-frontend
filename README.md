@@ -2,7 +2,7 @@
 
 `Node.js` — это среда, которая позволяет запускать JavaScript вне браузера. Без неё современные инструменты не работают.
 
-1. Зайди на официальный сайт [nodejs.org](https://nodejs.org).
+1. Зайди на официальный сайт [nodejs.org](https://nodejs.org/en/download)].
 2. Скачай версию, подписанную как **LTS** (Long Term Support). Это самая стабильная версия.
 3. Установи её как обычную программу (просто жми "Next").
 
@@ -19,7 +19,7 @@ node -v
 
 1. Клонируем репозиторий:
 ```bash
-git clone https://github.com/MykytaDiadiunov/semester-project-frontend.git
+git clone https://github.com/MykytaDiadiunov/semester-project-frontend.git --branch develop
 ```
 
 3. Заходим в папку проекта:

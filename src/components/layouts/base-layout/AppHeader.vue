@@ -25,8 +25,7 @@ const routing = useRouting()
 
 const actionList: HeaderActionItem[] = [
   { title: 'Home', routing: routing.toHome },
-  { title: 'Instructions', routing: routing.toInstructions },
-  { title: 'Licenses', routing: routing.toLicenses },
+  { title: 'Back', routing: routing.back },
 ]
 </script>
 
